@@ -1,0 +1,9 @@
+[submodule "note-service"]
+	path = note-service
+	url = ./note-service
+[submodule "users-service"]
+	path = users-service
+	url = ./users-service
+[submodule "mailing-service"]
+	path = mailing-service
+	url = ./mailing-service

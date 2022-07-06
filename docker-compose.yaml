@@ -1,0 +1,61 @@
+version: '3.8'
+services:
+    users-service:
+        build:
+            context: './users-service'
+            dockerfile: 'Dockerfile'
+        depends_on:
+            - users-service-db
+            - rabbitmq-service
+        ports:
+            - '8080:8080'
+        volumes:
+            - ./users-service:/app
+    note-service:
+        build:
+            context: './note-service'
+            dockerfile: 'Dockerfile'
+        depends_on:
+            - note-service-db
+        ports:
+            - '8081:8081'
+        volumes:
+            - ./note-service:/app
+    mailing-service:
+        build:
+            context: './mailing-service'
+            dockerfile: 'Dockerfile'
+        depends_on:
+            - rabbitmq-service
+        ports:
+            - '8082:8082'
+        volumes:
+            - ./mailing-service:/app
+    users-service-db:
+        image: postgres:14
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: users
+        volumes:
+            - ./users-service/data:/data/db
+        ports:
+            - '5432:5432'
+    note-service-db:
+        image: postgres:14
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: notes
+        volumes:
+            - ./note-service/data:/data/db
+        ports:
+            - '5433:5432'
+    rabbitmq-service:
+        image: rabbitmq:3.8-management-alpine
+        environment:
+            RABBITMQ_DEFAULT_USER: rabbitmq
+            RABBITMQ_DEFAULT_PASS: rabbitmq
+        ports:
+            - '5672:5672'
+            - '15672:15672'
