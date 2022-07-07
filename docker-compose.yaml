@@ -10,6 +10,7 @@ services:
         ports:
             - '8080:8080'
         volumes:
+            - /app/node_modules
             - ./users-service:/app
     note-service:
         build:
@@ -20,6 +21,7 @@ services:
         ports:
             - '8081:8081'
         volumes:
+            - /app/node_modules
             - ./note-service:/app
     mailing-service:
         build:
@@ -30,6 +32,7 @@ services:
         ports:
             - '8082:8082'
         volumes:
+            - /app/node_modules
             - ./mailing-service:/app
     users-service-db:
         image: postgres:14
