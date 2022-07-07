@@ -1,9 +1,9 @@
 [submodule "note-service"]
 	path = note-service
-	url = ./note-service
+	url = git@github.com:vb1120/note-service.git
 [submodule "users-service"]
 	path = users-service
-	url = ./users-service
+	url = git@github.com:vb1120/users-service.git
 [submodule "mailing-service"]
 	path = mailing-service
-	url = ./mailing-service
+	url = git@github.com:vb1120/mailing-service.git
